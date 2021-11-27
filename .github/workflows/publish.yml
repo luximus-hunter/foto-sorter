@@ -24,6 +24,7 @@ jobs:
           include-prerelease: true
       - name: 🚧 Build
         run: dotnet build
+      - name: 🚧 Publish
         run: dotnet publish -p:PublishSingleFile=true -r win-x64 -c Release --self-contained true -p:EnableCompressionInSingleFile=true
       - name: 🚀 Release
         uses: ncipollo/release-action@v1

@@ -26,4 +26,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         # if: startsWith(github.ref, 'refs/tags/')
         with:
+          name: v${{ env.GitVersion_SemVer }}
           files: ./FotoSorter/bin/Release/net6.0/win-x64/publish/FotoSorter.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

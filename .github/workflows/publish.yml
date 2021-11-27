@@ -15,18 +15,28 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-dotnet@v1
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '6.0.x'
           include-prerelease: true
-      - run: dotnet build
-      - run: dotnet publish -p:PublishSingleFile=true -r win-x64 -c Release --self-contained true -p:EnableCompressionInSingleFile=true
+      - name: Build
+        run: dotnet build
+      - name: Publish
+        run: dotnet publish -p:PublishSingleFile=true -r win-x64 -c Release --self-contained true -p:EnableCompressionInSingleFile=true
       - name: Release
-        uses: softprops/action-gh-release@v1
-        # if: startsWith(github.ref, 'refs/tags/')
+        uses: ncipollo/release-action@v1
         with:
-          name: v${{ env.GitVersion_SemVer }}
-          files: ./FotoSorter/bin/Release/net6.0/win-x64/publish/FotoSorter.exe
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          artifacts: "./FotoSorter/bin/Release/net6.0/win-x64/publish/FotoSorter.exe"
+          # bodyFile: "body.md"
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+        # uses: softprops/action-gh-release@v1
+        # # if: startsWith(github.ref, 'refs/tags/')
+        # with:
+        #   name: v${{ env.GitVersion_SemVer }}
+        #   files: ./FotoSorter/bin/Release/net6.0/win-x64/publish/FotoSorter.exe
+        # env:
+        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -210,6 +210,8 @@ foreach (BarChartItem fileTypesCount in fileTypes)
 
 output.Chart(Console.WindowWidth);
 
+output.ExportLog(destPath);
+
 // Functions
 void checkFilesInDirectory(string directory)
 {

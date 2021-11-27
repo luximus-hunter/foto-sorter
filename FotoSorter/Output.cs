@@ -38,7 +38,10 @@ namespace FotoSorter
 
         public void AddChartItem(BarChartItem item)
         {
-            barChartItems.Add(item);
+            if(item.Value > 0)
+            {
+                barChartItems.Add(item);
+            }
         }
 
         public void Chart(int width)

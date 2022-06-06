@@ -320,7 +320,7 @@ string getMonthFullName(int monthNumber)
     case 12:
       return "12-December";
     default:
-      return "00_invalid-month";
+      return "00-invalid-month";
   }
 }
 
